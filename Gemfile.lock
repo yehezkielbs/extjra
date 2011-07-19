@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/yehezkielbs/rest_engine.git
+  revision: 1ec444f0697163d26b164f2313a7e995e4c85540
+  specs:
+    rest_engine (0.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -96,6 +102,7 @@ DEPENDENCIES
   jeweler (~> 1.6.4)
   rails (~> 3.0.9)
   rcov
+  rest_engine!
   rspec (~> 2.6.0)
   rspec-rails (~> 2.6.0)
   sqlite3 (~> 1.3.3)

@@ -1,0 +1,19 @@
+Ext.define('Extjra.model.<%= @model_name %>', {
+    extend: 'Ext.data.Model',
+
+    fields: [
+        <% columns = @model.columns %>
+        <% columns.each_with_index do |column, index| %>
+        '<%= column.name %>',
+        <% end %>
+
+        <% associations = @model.reflect_on_all_associations(:belongs_to) %>
+        <% associations.each_with_index do |association, index| %>
+        {
+            name: '<%= association.name %>_name',
+            mapping: '<%= association.name %>.name',
+            persist: false
+        },
+        <% end %>
+    ]
+});

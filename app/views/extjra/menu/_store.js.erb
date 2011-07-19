@@ -1,0 +1,16 @@
+Ext.define('Extjra.store._menu', {
+    extend: 'Ext.data.TreeStore',
+    model: 'Extjra.model._menu',
+    root: {
+        expanded: true,
+        children: [
+            <% @class_names.each do |class_name| %>
+            {
+                text: '<%= class_name.titleize %>',
+                uri: '<%= class_name.tableize %>',
+                leaf: true
+            }<% unless class_name == @class_names.last %>,<% end %>
+            <% end %>
+        ]
+    }
+});

@@ -1,0 +1,86 @@
+Ext.define('Extjra.view.<%= @resources %>', {
+    extend: 'Ext.grid.Panel',
+    alias: 'widget.<%= @resources %>',
+
+    title: '<%= @resources %>',
+    store: '<%= @resources %>',
+
+    initComponent: function() {
+        //console.log('init component');
+        var theGrid = this;
+        var rowEditor = Ext.create('Ext.grid.plugin.RowEditing');
+        this.plugins = [rowEditor];
+
+        this.dockedItems = [
+            {
+                xtype: 'toolbar',
+                dock: 'top',
+                items: [
+                    {
+                        text: 'Add',
+                        iconCls: 'icon-add',
+                        handler: function() {
+                            // empty record
+                            theGrid.store.insert(0, new Extjra.model.<%= @model_name %>());
+                            rowEditor.startEdit(0, 0);
+                        }
+                    },
+                    '-',
+                    {
+                        itemId: 'delete',
+                        text: 'Delete',
+                        iconCls: 'icon-delete',
+                        //disabled: true,
+                        handler: function() {
+                            console.log(theGrid);
+                            var selection = theGrid.getView().getSelectionModel().getSelection()[0];
+                            if (selection) {
+                                theGrid.store.remove(selection);
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                xtype: 'pagingtoolbar',
+                dock: 'bottom',
+                store: '<%= @resources %>',
+                displayInfo: true,
+                displayMsg: 'Displaying {0} - {1} of {2}',
+                emptyMsg: 'Nothing to display'
+            }
+        ];
+
+
+        this.callParent(arguments);
+    },
+
+    //iconCls: 'icon-user',
+    columns: [
+        <% @model.columns.each_with_index do |column, index| %>
+        {
+            <% association = @model.reflect_on_association(column.name.gsub(/_id$/, '').to_sym) %>
+            <% if association && association.macro == :belongs_to %>
+            field:  {
+                xtype: 'combobox',
+                store: '<%= association.name.to_s.pluralize %>',
+                valueField: 'id',
+                displayField: 'name'
+            },
+            xtype:'templatecolumn', tpl:'{<%= association.name %>_name}',
+            <% else %>
+            field: {
+                xtype: 'textfield'
+            },
+            <% end %>
+            dataIndex: '<%= column.name %>',
+            text: '<%= column.name.titleize %>',
+
+            sortable: true
+        }<% unless index == @model.columns.length %>,<% end %>
+        <% end %>
+    ]
+});
+//grid.getSelectionModel().on('selectionchange', function(selModel, selections){
+//    grid.down('#delete').setDisabled(selections.length === 0);
+//});

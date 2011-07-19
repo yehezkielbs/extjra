@@ -1,0 +1,39 @@
+Ext.define('Extjra.controller._menu', {
+    extend: 'Ext.app.Controller',
+
+    models: ['_menu'],
+    stores: ['_menu'],
+    views: ['_menu'],
+
+    init: function() {
+        this.control({
+            '_menu': {
+                select: this.itemSelected
+            }
+        });
+    },
+
+    itemSelected: function(selModel, record) {
+        var uri, tabId, tab;
+
+        if (record.get('leaf')) {
+            uri = record.get('uri');
+            tabId = uri + '-tab';
+            tab = Ext.getCmp(tabId);
+
+            if (tab) {
+                tab.show();
+            }
+            else {
+                this.application.getController(uri);
+                Ext.getCmp('content-panel').add({
+                    id: tabId,
+                    title: record.data.text,
+                    xtype: record.get('uri'),
+                    closable: true
+                }).show();
+                Ext.getCmp(tabId).store.load();
+            }
+        }
+    }
+});

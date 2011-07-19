@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope 'admin', :as => 'extjra' do
-    get '/', :to => 'extjra/main#index', :as => 'index'
+    get '/', :to => 'extjra/main#index', :as => 'index', :format => 'html'
 
     get '/controller/_menu', :to => 'extjra/menu#controller', :as => 'menu_controller', :format => 'js'
     get '/model/_menu', :to => 'extjra/menu#model', :as => 'menu_model', :format => 'js'
