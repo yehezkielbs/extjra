@@ -40,3 +40,5 @@ task :default => :spec
 
 require 'yard'
 YARD::Rake::YardocTask.new
+
+import 'lib/tasks/cucumber.rake'
