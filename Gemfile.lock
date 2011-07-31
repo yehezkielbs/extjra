@@ -59,6 +59,7 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    factory_girl (2.0.2)
     ffi (1.0.9)
     gherkin (2.4.5)
       json (>= 1.4.6)
@@ -139,6 +140,7 @@ DEPENDENCIES
   cucumber-rails (~> 1.0.2)
   database_cleaner (~> 0.6.7)
   extjra!
+  factory_girl (~> 2.0.2)
   jeweler (~> 1.6.4)
   rails (~> 3.0.9)
   rcov

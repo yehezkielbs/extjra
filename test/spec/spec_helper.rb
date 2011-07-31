@@ -1,12 +1,6 @@
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'rspec'
-require 'extjra'
+require File.expand_path('../../prepare_test_app', __FILE__)
 
-# Requires supporting files with custom matchers and macros, etc,
-# in ./support/ and its subdirectories.
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+require 'rspec/rails'
+require 'factory_girl'
 
-RSpec.configure do |config|
-  
-end
+require File.expand_path('../support/factories', __FILE__)

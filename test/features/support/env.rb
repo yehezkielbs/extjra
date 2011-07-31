@@ -4,7 +4,7 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-require File.expand_path('../../../load_test_app', __FILE__)
+require File.expand_path('../../../prepare_test_app', __FILE__)
 
 require 'cucumber/rails'
 
