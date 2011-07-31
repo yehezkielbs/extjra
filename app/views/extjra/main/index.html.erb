@@ -1,45 +1,47 @@
-<%= javascript_tag do -%>
-    Ext.onReady(function() {
-        Ext.Loader.setConfig({
-            enabled: true,
-            //paths: {
-            //    'Extjra': 'admin'
-            //}
+<% content_for(:head) do %>
+    <%= javascript_tag do %>
+        Ext.onReady(function() {
+            Ext.Loader.setConfig({
+                enabled: true,
+                //paths: {
+                //    'Extjra': 'admin'
+                //}
+            });
+
+            Ext.application({
+                name: 'Extjra',
+
+                appFolder: 'admin',
+
+                controllers: [
+                    '_menu'
+                ],
+
+                launch: function() {
+                    Ext.create('Ext.Viewport', {
+                        layout: 'border',
+                        renderTo: Ext.getBody(),
+                        items: [
+                            {
+                                xtype: 'box',
+                                id: 'header-panel',
+                                region: 'north',
+                                html: '<h1>Extjra - ExtJS Rails Admin</h1>',
+                                height: 30
+                            },
+                            {
+                                xtype: '_menu'
+                            },
+                            {
+                                xtype: 'tabpanel',
+                                region: 'center',
+                                margins: '5 5 5 0',
+                                id: 'content-panel'
+                            }
+                        ]
+                    });
+                }
+            });
         });
-
-        Ext.application({
-            name: 'Extjra',
-
-            appFolder: 'admin',
-
-            controllers: [
-                '_menu'
-            ],
-
-            launch: function() {
-                Ext.create('Ext.Viewport', {
-                    layout: 'border',
-                    renderTo: Ext.getBody(),
-                    items: [
-                        {
-                            xtype: 'box',
-                            id: 'header-panel',
-                            region: 'north',
-                            html: '<h1>Extjra - ExtJS Rails Admin</h1>',
-                            height: 30
-                        },
-                        {
-                            xtype: '_menu'
-                        },
-                        {
-                            xtype: 'tabpanel',
-                            region: 'center',
-                            margins: '5 5 5 0',
-                            id: 'content-panel'
-                        }
-                    ]
-                });
-            }
-        });
-    });
-<% end -%>
+    <% end %>
+<% end %>
