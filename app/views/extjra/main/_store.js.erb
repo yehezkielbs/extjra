@@ -2,7 +2,7 @@ Ext.define('Extjra.store.<%= @resources %>', {
     extend: 'Ext.data.Store',
 
     autoLoad: false,
-    autoSync: true,
+    autoSync: false,
     pageSize: 25,
     model: 'Extjra.model.<%= @model_name %>',
     proxy: {

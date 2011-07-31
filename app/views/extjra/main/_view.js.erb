@@ -18,25 +18,40 @@ Ext.define('Extjra.view.<%= @resources %>', {
                 items: [
                     {
                         text: 'Add',
-                        iconCls: 'icon-add',
+                        //iconCls: 'icon-add',
                         handler: function() {
                             // empty record
                             theGrid.store.insert(0, new Extjra.model.<%= @model_name %>());
-                            rowEditor.startEdit(0, 0);
+                            rowEditor.startEdit(0, 1);
                         }
                     },
                     '-',
                     {
-                        itemId: 'delete',
+                        text: 'Edit',
+                        handler: function() {
+                            var selection = theGrid.getView().getSelectionModel().getSelection()[0];
+                            rowEditor.startEdit(selection.index, 1);
+                        }
+                    },
+                    '-',
+                    {
                         text: 'Delete',
-                        iconCls: 'icon-delete',
+                        //iconCls: 'icon-delete',
                         //disabled: true,
                         handler: function() {
-                            console.log(theGrid);
+                            //console.log(theGrid);
                             var selection = theGrid.getView().getSelectionModel().getSelection()[0];
                             if (selection) {
                                 theGrid.store.remove(selection);
+                                //theGrid.store.sync();
                             }
+                        }
+                    },
+                    '-',
+                    {
+                        text: 'Save',
+                        handler: function() {
+                            theGrid.store.sync();
                         }
                     }
                 ]
