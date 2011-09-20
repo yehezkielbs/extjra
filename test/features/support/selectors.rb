@@ -34,12 +34,6 @@ module HtmlSelectorsHelpers
                   "Now, go and add a mapping in #{__FILE__}"
     end
   end
-
-  def navigation_index(menu_text)
-    {
-        'Customer' => 0
-    }[menu_text]
-  end
 end
 
 World(HtmlSelectorsHelpers)

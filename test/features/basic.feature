@@ -7,6 +7,7 @@ Feature: Basic CRUD scenarios
       | Customer Name 1 | Customer Address 1 | Customer Description 1 |
     When I go to the admin page
     And I click "Customer" on Navigation panel
+    And I wait until "Customer" tab is ready
 
   Scenario: View
     Then I should see "Customer Name 1"
@@ -18,6 +19,7 @@ Feature: Basic CRUD scenarios
     And I press "Delete"
     Then I should not see "Customer Name 1"
     When I press "Save"
+    And I wait until the saving process finish
     Then the Customer data should be empty
 
   Scenario: Edit
@@ -27,6 +29,7 @@ Feature: Basic CRUD scenarios
     And I press "Update"
     Then I should see "Modified customer name"
     When I press "Save"
+    And I wait until the saving process finish
     Then This Customer data should exists:
       | Name                   | Address            | Description            |
       | Modified customer name | Customer Address 1 | Customer Description 1 |
@@ -41,6 +44,7 @@ Feature: Basic CRUD scenarios
     And I should see "Customer Address 2"
     And I should see "Customer Description 2"
     When I press "Save"
+    And I wait until the saving process finish
     Then This Customer data should exists:
       | Name            | Address            | Description            |
       | Customer Name 2 | Customer Address 2 | Customer Description 2 |
