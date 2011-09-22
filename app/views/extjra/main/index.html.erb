@@ -14,7 +14,10 @@
                 appFolder: 'admin',
 
                 controllers: [
-                    '_menu'
+                    '_menu',
+                    <% @class_names.each do |class_name| %>
+                    '<%= class_name.tableize %>'<% unless class_name == @class_names.last %>,<% end %>
+                    <% end %>
                 ],
 
                 launch: function() {

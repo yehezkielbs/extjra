@@ -21,3 +21,9 @@ When /^I wait until the saving process finish$/ do
     sleep 0.2
   end
 end
+
+When /^I select "([^"]*)" from "([^"]*)" combo box$/ do |value, field|
+  fill_in(field, :with => value)
+  option = page.all('li.x-boundlist-item').find {|item| item.text == value}
+  option.click
+end

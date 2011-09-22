@@ -9,6 +9,7 @@ Ext.define('Extjra.store.<%= @resources %>', {
         type: 'rest',
         url: '/api/<%= @resources %>',
         format: 'json',
+        extraParams: { include: 'associations' },
         reader: {
             type: 'json',
             root: '<%= @resources %>',

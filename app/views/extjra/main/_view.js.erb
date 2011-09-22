@@ -6,7 +6,6 @@ Ext.define('Extjra.view.<%= @resources %>', {
     store: '<%= @resources %>',
 
     initComponent: function() {
-        //console.log('init component');
         var theGrid = this;
         var rowEditor = Ext.create('Ext.grid.plugin.RowEditing');
         this.plugins = [rowEditor];
@@ -39,11 +38,9 @@ Ext.define('Extjra.view.<%= @resources %>', {
                         //iconCls: 'icon-delete',
                         //disabled: true,
                         handler: function() {
-                            //console.log(theGrid);
                             var selection = theGrid.getView().getSelectionModel().getSelection()[0];
                             if (selection) {
                                 theGrid.store.remove(selection);
-                                //theGrid.store.sync();
                             }
                         }
                     },
@@ -80,7 +77,14 @@ Ext.define('Extjra.view.<%= @resources %>', {
                 xtype: 'combobox',
                 store: '<%= association.name.to_s.pluralize %>',
                 valueField: 'id',
-                displayField: 'name'
+                displayField: 'name',
+                forceSelection: true,
+                queryMode: 'local'
+            },
+            listeners: {
+                beforerender: function () {
+                    Ext.getStore('<%= association.name.to_s.pluralize %>').load();
+                }
             },
             xtype:'templatecolumn', tpl:'{<%= association.name %>_name}',
             <% else %>
@@ -92,7 +96,8 @@ Ext.define('Extjra.view.<%= @resources %>', {
             text: '<%= column.name.titleize %>',
 
             sortable: true
-        }<% unless index == @model.columns.length %>,<% end %>
+        }<% unless index == @model.columns.length %>,
+        <% end %>
         <% end %>
     ]
 });
