@@ -1,18 +1,18 @@
-Ext.define('Extjra.store.<%= @resources %>', {
+Ext.define('Extjra.store.<%= @abstract_model.resources %>', {
     extend: 'Ext.data.Store',
 
     autoLoad: false,
     autoSync: false,
     pageSize: 25,
-    model: 'Extjra.model.<%= @model_name %>',
+    model: 'Extjra.model.<%= @abstract_model.model %>',
     proxy: {
         type: 'rest',
-        url: '/api/<%= @resources %>',
+        url: '/api/<%= @abstract_model.resources %>',
         format: 'json',
         extraParams: { include: 'associations' },
         reader: {
             type: 'json',
-            root: '<%= @resources %>',
+            root: '<%= @abstract_model.resources %>',
             successProperty: 'success',
             totalProperty: 'total',
             messageProperty: 'message'

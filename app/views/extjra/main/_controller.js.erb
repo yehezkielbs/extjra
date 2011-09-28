@@ -1,16 +1,16 @@
-Ext.define('Extjra.controller.<%= @resources %>', {
+Ext.define('Extjra.controller.<%= @abstract_model.resources %>', {
     extend: 'Ext.app.Controller',
 
     models: [
-        '<%= @model_name %>'
+        '<%= @abstract_model.model %>'
     ],
 
     stores: [
-        '<%= @resources %>'
+        '<%= @abstract_model.resources %>'
     ],
 
     views: [
-        '<%= @resources %>'
+        '<%= @abstract_model.resources %>'
     ],
 
     init: function() {

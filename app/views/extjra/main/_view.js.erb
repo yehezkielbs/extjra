@@ -1,9 +1,9 @@
-Ext.define('Extjra.view.<%= @resources %>', {
+Ext.define('Extjra.view.<%= @abstract_model.resources %>', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.<%= @resources %>',
+    alias: 'widget.<%= @abstract_model.resources %>',
 
-    title: '<%= @resources %>',
-    store: '<%= @resources %>',
+    title: '<%= @abstract_model.resources %>',
+    store: '<%= @abstract_model.resources %>',
 
     initComponent: function() {
         var theGrid = this;
@@ -20,7 +20,7 @@ Ext.define('Extjra.view.<%= @resources %>', {
                         //iconCls: 'icon-add',
                         handler: function() {
                             // empty record
-                            theGrid.store.insert(0, new Extjra.model.<%= @model_name %>());
+                            theGrid.store.insert(0, new Extjra.model.<%= @abstract_model.model %>());
                             rowEditor.startEdit(0, 1);
                         }
                     },
@@ -56,7 +56,7 @@ Ext.define('Extjra.view.<%= @resources %>', {
             {
                 xtype: 'pagingtoolbar',
                 dock: 'bottom',
-                store: '<%= @resources %>',
+                store: '<%= @abstract_model.resources %>',
                 displayInfo: true,
                 displayMsg: 'Displaying {0} - {1} of {2}',
                 emptyMsg: 'Nothing to display'
@@ -69,9 +69,9 @@ Ext.define('Extjra.view.<%= @resources %>', {
 
     //iconCls: 'icon-user',
     columns: [
-        <% @model.columns.each_with_index do |column, index| %>
+        <% @abstract_model.columns.each_with_index do |column, index| %>
         {
-            <% association = @model.reflect_on_association(column.name.gsub(/_id$/, '').to_sym) %>
+            <% association = @abstract_model.model_class.reflect_on_association(column.name.gsub(/_id$/, '').to_sym) %>
             <% if association && association.macro == :belongs_to %>
             field:  {
                 xtype: 'combobox',
@@ -96,7 +96,7 @@ Ext.define('Extjra.view.<%= @resources %>', {
             text: '<%= column.name.titleize %>',
 
             sortable: true
-        }<% unless index == @model.columns.length %>,
+        }<% unless index == @abstract_model.columns.length %>,
         <% end %>
         <% end %>
     ]

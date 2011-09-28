@@ -1,14 +1,13 @@
-Ext.define('Extjra.model.<%= @model_name %>', {
+Ext.define('Extjra.model.<%= @abstract_model.model %>', {
     extend: 'Ext.data.Model',
 
     fields: [
-        <% columns = @model.columns %>
-        <% columns.each_with_index do |column, index| %>
-        '<%= column.name %>',
+        <% columns = @abstract_model.columns %>
+        <% columns.each do |column| %>
+            '<%= column.name %>',
         <% end %>
 
-        <% associations = @model.reflect_on_all_associations(:belongs_to) %>
-        <% associations.each_with_index do |association, index| %>
+        <% @abstract_model.belongs_to_associations.each do |association| %>
         {
             name: '<%= association.name %>_name',
             mapping: '<%= association.name %>.name',
